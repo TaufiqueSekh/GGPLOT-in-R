@@ -1,0 +1,42 @@
+View(iris)
+attach(iris)
+plot(Sepal.Length~Petal.Length)
+plot(Sepal.Length~Petal.Length,ylab="Sepal.Length",xlab="Petal.Length",main="Petal.Length VS Sepal.Length",col="blue",pch=16)
+
+hist(Sepal.Length,xlab="Petal.Length",main="Petal.Length VS Sepal.Length",col="blue")
+
+boxplot(Sepal.Length)
+boxplot(Sepal.Length~Species)
+library(tidyverse)
+ggplot(iris,aes(x=Petal.Length,y=Sepal.Length,shape=Species,col=Species))+geom_point()
+
+View(mpg)
+mpg
+dele<-select(mpg,c(-1))
+##Histogram
+ggplot(mpg,aes(x=displ))+geom_histogram()
+ggplot(mpg,aes(x=displ,col=))+geom_histogram(bins=50,col="red")
+
+ggplot(mpg,aes(x=displ,col=manufacturer))+geom_histogram(bins=50) 
+
+##Barplot
+ggplot(mpg,aes(class,fill=manufacturer))+geom_bar(position="fill")
+
+##Frequency
+ggplot(mpg,aes(displ))+geom_freqpoly(bins=60)
+ggplot(mpg,aes(displ,col=class))+geom_freqpoly(bins=60)
+##Boxplot
+ggplot(mpg,aes(y=displ,x=factor(year),fill=factor(year)))+geom_boxplot()
+##Smoth line
+ggplot(mpg,aes(x=year,y=displ))+geom_smooth(se=F)
+##Linear model
+ggplot(mpg,aes(x=year,y=displ,col=year))+geom_point()+geom_smooth(method="lm",se=F)
+##Facet grid
+ggplot(mpg,aes(x=year,y=displ,col=year))+geom_point()+geom_smooth(method="lm",se=F)+facet_grid(~manufacturer)
+##Theme
+ggplot(mpg,aes(y=displ,x=factor(year),fill=factor(year)))+geom_boxplot()->gg
+ggg<-gg+theme(panel.background=element_rect(fill="lemonchiffon2"))
+g4<-ggg+theme(legend.background=element_rect(fill="lemonchiffon2"))
+g4+theme(plot.background=element_rect(fill="lightcoral"))->g5
+g5+labs(title="Year vs displ",X="Year",fill="year")
+
